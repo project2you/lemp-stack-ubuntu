@@ -1,35 +1,34 @@
-read -p "Write the host name, eg. google:" HOST;
-read -p "Write the 1st level domain name without starting dot (.), eg. com.au:" DOMAIN;
+read -p "Write the host name, eg. xxx.com :" HOST;
 
 mkdir -p /var/www/$HOST.$DOMAIN/web
 mkdir -p /var/www/$HOST.$DOMAIN/logs
 mkdir -p /var/www/$HOST.$DOMAIN/ssl
 
-touch /etc/apache2/sites-available/$HOST.$DOMAIN
+touch /etc/apache2/sites-available/$HOST
 
 echo "<VirtualHost *:80>
-    ServerAdmin admin@$HOST.$DOMAIN
-    ServerName $HOST.$DOMAIN 
-    ServerAlias $HOST.$DOMAIN
+    ServerAdmin admin@$HOST
+    ServerName $HOST 
+    ServerAlias $HOST
 
-    ErrorLog /var/www/$HOST.$DOMAIN/logs/error.log
+    ErrorLog /var/www/$HOST/logs/error.log
     LogLevel warn
-    CustomLog /var/www/$HOST.$DOMAIN/logs/access.log combined
+    CustomLog /var/www/$HOST/logs/access.log combined
     
-    DocumentRoot /var/www/$HOST.$DOMAIN/web
+    DocumentRoot /var/www/$HOST/web
     <Directory />
         Options FollowSymLinks
         AllowOverride None
     </Directory>
-    <Directory /var/www/$HOST.$DOMAIN/web/ >
+    <Directory /var/www/$HOST/web/ >
         Options Indexes FollowSymLinks MultiViews
         AllowOverride All
         Order allow,deny
         Allow from All
         Require all granted
     </Directory>
-</VirtualHost>" >> /etc/apache2/sites-available/$HOST.$DOMAIN
+</VirtualHost>" >> /etc/apache2/sites-available/$HOST
 
-ln -s /etc/apache2/sites-available/$HOST.$DOMAIN /etc/apache2/sites-enabled/$HOST.$DOMAIN.conf
+ln -s /etc/apache2/sites-available/$HOST.$DOMAIN /etc/apache2/sites-enabled/$HOST.conf
 
 service apache2 restart
