@@ -1,8 +1,8 @@
 read -p "Write the host name, eg. xxx.com :" HOST;
 
-mkdir -p /var/www/$HOST.$DOMAIN/web
-mkdir -p /var/www/$HOST.$DOMAIN/logs
-mkdir -p /var/www/$HOST.$DOMAIN/ssl
+mkdir -p /var/www/$HOST/web
+mkdir -p /var/www/$HOST/logs
+mkdir -p /var/www/$HOST/ssl
 
 touch /etc/apache2/sites-available/$HOST
 
@@ -29,6 +29,6 @@ echo "<VirtualHost *:80>
     </Directory>
 </VirtualHost>" >> /etc/apache2/sites-available/$HOST
 
-ln -s /etc/apache2/sites-available/$HOST.$DOMAIN /etc/apache2/sites-enabled/$HOST.conf
+ln -s /etc/apache2/sites-available/$HOST /etc/apache2/sites-enabled/$HOST.conf
 
 service apache2 restart
