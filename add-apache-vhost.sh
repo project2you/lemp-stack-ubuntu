@@ -9,7 +9,7 @@ touch /etc/apache2/sites-available/$HOST.$DOMAIN
 
 echo "<VirtualHost *:80>
     ServerAdmin admin@$HOST.$DOMAIN
-    ServerName $HOST.$DOMAIN www.$HOST.$DOMAIN
+    ServerName $HOST.$DOMAIN 
     ServerAlias $HOST.$DOMAIN
 
     ErrorLog /var/www/$HOST.$DOMAIN/logs/error.log
